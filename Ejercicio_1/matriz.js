@@ -5,39 +5,11 @@ const table = document.querySelector(".main-table")
 const minmaxHtml = document.querySelector(".min-max")
 let range = 100
 
-// Anadiendo un eventListener de tipo 'click' al elemento generate
-generate.addEventListener('click', ()=>{
-
-    // Evaluando si los datos necesarios estan presentes
-    if(inDimensions.value == 0){
-        inDimensions.focus()
-        return
-    }
-    if(inElements.value == 0){
-        inElements.focus()
-        return
-    }
-
-    // creando una nueva matriz usando crear_matriz()
-    let new_matrix = crear_matriz(inDimensions.value, inElements.value)
-
-    // creando un fragmento de html con todo el contenido de la matriz creada anteriormente
-    let {docFragment : mainFragment, min_max} = mostrar(new_matrix)
-    
-    // limpiando y anadiendo el fragmento de html a la tabla
-    table.innerHTML = ''
-    table.appendChild(mainFragment)
-
-    // escribiendo los valores maximos y minimos
-    minmaxHtml.innerHTML = ''
-    let secFragment = mostrar_minmax(min_max.min, min_max.max)
-    minmaxHtml.appendChild(secFragment)
-})
 
 
 // Creando funcion crear_matriz que se vale de ciclos for para crear una matriz multidimensional
 function crear_matriz(dimensiones, elementos){
-
+    
     let matriz = []
     for(let i = 1; i <= dimensiones; i++){
         let aux = []
@@ -86,6 +58,7 @@ function mostrar(arreglo){
     return {docFragment, min_max}
 }
 
+// creando funcion para mostrar los elementos minimo y maximo en html
 function mostrar_minmax(min, max){
     let minmaxFragment = new DocumentFragment()
     let p1 = document.createElement('p')
@@ -100,3 +73,45 @@ function mostrar_minmax(min, max){
     minmaxFragment.appendChild(p2)
     return minmaxFragment
 }
+
+// Anadiendo un eventListener de tipo 'click' al elemento generate
+generate.addEventListener('click', ()=>{
+
+    // Evaluando si los datos necesarios estan presentes
+    if(inDimensions.value == 0){
+        inDimensions.focus()
+        return
+    }
+    if(inElements.value == 0){
+        inElements.focus()
+        return
+    }
+
+    // creando una nueva matriz usando crear_matriz()
+    let new_matrix = crear_matriz(inDimensions.value, inElements.value)
+
+    // creando un fragmento de html con todo el contenido de la matriz creada anteriormente
+    // y extrayendo los numeros maximos y minimos
+    let {docFragment : mainFragment, min_max} = mostrar(new_matrix)
+    
+    // limpiando y anadiendo el fragmento de html a la tabla
+    table.innerHTML = ''
+    table.appendChild(mainFragment)
+
+    // escribiendo los valores maximos y minimos
+    minmaxHtml.innerHTML = ''
+    let secFragment = mostrar_minmax(min_max.min, min_max.max)
+    minmaxHtml.appendChild(secFragment)
+
+    // Pintando el maximo y minimo en el html
+    table.querySelectorAll('tr').forEach(tr=>{
+        let mintd = tr.querySelector(`[data-num = "${min_max.min}"]`)
+        let maxtd = tr.querySelector(`[data-num = "${min_max.max}"]`)
+        if(mintd !== null){
+            mintd.classList = 'min'
+        }
+        if(maxtd !== null){
+            maxtd.classList = 'max'
+        }
+    })
+})
