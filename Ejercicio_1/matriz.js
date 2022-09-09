@@ -2,6 +2,7 @@ const inDimensions = document.querySelector(".in-dimensions")
 const inElements = document.querySelector(".in-elements")
 const generate = document.querySelector(".generate")
 const table = document.querySelector(".main-table")
+const minmaxHtml = document.querySelector(".min-max")
 let range = 100
 
 // Anadiendo un eventListener de tipo 'click' al elemento generate
@@ -21,12 +22,23 @@ generate.addEventListener('click', ()=>{
     let new_matrix = crear_matriz(inDimensions.value, inElements.value)
 
     // creando un fragmento de html con todo el contenido de la matriz creada anteriormente
-    let fragment = mostrar(new_matrix)
+    let {docFragment : fragment, min_max} = mostrar(new_matrix)
     
     // limpiando y anadiendo el fragmento de html a la tabla
     table.innerHTML = ''
     table.appendChild(fragment)
 
+    // escribiendo los valores maximos y minimos
+    let minmaxFragment = new DocumentFragment()
+    let p1 = document.createElement('p')
+    let text1 = document.createTextNode(`El numero menor es: ${min_max.min}`)
+    p1.appendChild(text1)
+    let p2 = document.createElement('p')
+    let text2 = document.createTextNode(`El numero mayor es: ${min_max.max}`)
+    p2.appendChild(text2)
+    minmaxFragment.appendChild(p1)
+    minmaxFragment.appendChild(p2)
+    minmaxHtml.appendChild(minmaxFragment)
 })
 
 
@@ -47,36 +59,37 @@ function crear_matriz(dimensiones, elementos){
 
 // Creando funcion para mostrar los elementos de la matriz
 function mostrar(arreglo, target){
+    let min_max = {min : 1, max : 1}
+
     let docFragment = new DocumentFragment()
     for(fila in arreglo){
         let tr = document.createElement('tr')
         for(columna in arreglo[fila]){
+            let current_number = arreglo[fila][columna]
             let td = document.createElement('td')
-            let text = document.createTextNode(arreglo[fila][columna])
+            let text = document.createTextNode(current_number)
+            td.dataset.num = current_number
             td.appendChild(text)
             tr.appendChild(td)
+
+            // evaluacion min max
+            if(current_number < min_max.max){
+                continue
+            }
+            else{
+                if(current_number > min_max.min){
+                    min_max.min = current_number
+                }
+                else if(current_number > min_max.max){
+                    min_max.max = current_number
+                }
+                else {
+                    continue
+                }
+            }
         }
         docFragment.appendChild(tr)
     }
-    return docFragment
-}
-
-function min_max(numero, indice){
-    let minimo = 0
-    let maximo = 0
-    let indice = [0, 0]
-    if(numero == 1){
-        minimo = numero
-        min_indice = indice
-    }
-    else{
-        if(numero < minimo){
-            minimo = numero
-            min_indice = indice
-        }
-        else if(numero > maximo){
-            maximo = numero
-            max_indice = indice
-        }
-    }
+    console.log(docFragment)
+    return {docFragment, min_max}
 }
