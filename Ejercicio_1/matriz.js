@@ -22,23 +22,16 @@ generate.addEventListener('click', ()=>{
     let new_matrix = crear_matriz(inDimensions.value, inElements.value)
 
     // creando un fragmento de html con todo el contenido de la matriz creada anteriormente
-    let {docFragment : fragment, min_max} = mostrar(new_matrix)
+    let {docFragment : mainFragment, min_max} = mostrar(new_matrix)
     
     // limpiando y anadiendo el fragmento de html a la tabla
     table.innerHTML = ''
-    table.appendChild(fragment)
+    table.appendChild(mainFragment)
 
     // escribiendo los valores maximos y minimos
-    let minmaxFragment = new DocumentFragment()
-    let p1 = document.createElement('p')
-    let text1 = document.createTextNode(`El numero menor es: ${min_max.min}`)
-    p1.appendChild(text1)
-    let p2 = document.createElement('p')
-    let text2 = document.createTextNode(`El numero mayor es: ${min_max.max}`)
-    p2.appendChild(text2)
-    minmaxFragment.appendChild(p1)
-    minmaxFragment.appendChild(p2)
-    minmaxHtml.appendChild(minmaxFragment)
+    minmaxHtml.innerHTML = ''
+    let secFragment = mostrar_minmax(min_max.min, min_max.max)
+    minmaxHtml.appendChild(secFragment)
 })
 
 
@@ -58,8 +51,8 @@ function crear_matriz(dimensiones, elementos){
 }
 
 // Creando funcion para mostrar los elementos de la matriz
-function mostrar(arreglo, target){
-    let min_max = {min : 1, max : 1}
+function mostrar(arreglo){
+    let min_max = {min : arreglo[0][0], max : arreglo[0][0]}
 
     let docFragment = new DocumentFragment()
     for(fila in arreglo){
@@ -73,11 +66,11 @@ function mostrar(arreglo, target){
             tr.appendChild(td)
 
             // evaluacion min max
-            if(current_number < min_max.max){
-                continue
+            if(current_number == 0){
+                min_max.min = current_number
             }
             else{
-                if(current_number > min_max.min){
+                if(current_number < min_max.min){
                     min_max.min = current_number
                 }
                 else if(current_number > min_max.max){
@@ -90,6 +83,20 @@ function mostrar(arreglo, target){
         }
         docFragment.appendChild(tr)
     }
-    console.log(docFragment)
     return {docFragment, min_max}
+}
+
+function mostrar_minmax(min, max){
+    let minmaxFragment = new DocumentFragment()
+    let p1 = document.createElement('p')
+    let text1 = document.createTextNode(`El numero menor es: ${min}`)
+    p1.appendChild(text1)
+    p1.classList = 'minText'
+    let p2 = document.createElement('p')
+    let text2 = document.createTextNode(`El numero mayor es: ${max}`)
+    p2.appendChild(text2)
+    p2.classList = 'maxText'
+    minmaxFragment.appendChild(p1)
+    minmaxFragment.appendChild(p2)
+    return minmaxFragment
 }
