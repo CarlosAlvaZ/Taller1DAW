@@ -13,27 +13,26 @@ const inImage = inputs.querySelector("#inImage")
 const add_button = inputs.querySelector(".add-button")
 
 add_button.addEventListener("click", ()=>{
-    if(inId.value == ""){
-        inId.focus()
-        return
-    }
-    else if(inTitle.value == ""){
-        inTitle.focus()
-        return
-    }
-    else if(inAuthName.value == ""){
-        inAuthLast.focus()
-        return
-    }
-    else if(inCat.value == ""){
-        inCat.focus()
-        return
-    }
-    else if(inPrice.value == ""){
-        inPrice.focus()
-        return
-    }
-    
+    // if(inId.value == ""){
+    //     inId.focus()
+    //     return
+    // }
+    // else if(inTitle.value == ""){
+    //     inTitle.focus()
+    //     return
+    // }
+    // else if(inAuthName.value == ""){
+    //     inAuthLast.focus()
+    //     return
+    // }
+    // else if(inCat.value == ""){
+    //     inCat.focus()
+    //     return
+    // }
+    // else if(inPrice.value == ""){
+    //     inPrice.focus()
+    //     return
+    // }
     const data = new GetBookData(
         inId,
         inTitle,
@@ -43,9 +42,8 @@ add_button.addEventListener("click", ()=>{
         inPrice,
         inImage
     ).getData()
-    console.log(data)
-    // let uploaded = upload(file)
-    // list.appendChild(uploaded)
+    
+    list.appendChild( crearPresentacion(data, template_element) )
 })
 
 // Declarando la funcion upload, la cual crea un lector de archivos para poder extraer
@@ -83,4 +81,33 @@ class GetBookData {
             image: this.image
         }
     }
+}
+
+function crearPresentacion(data, temp){
+    const template = temp.content.cloneNode(true)
+    const bookElement = template.querySelector(".book-element")
+    const img = bookElement.querySelector(".img")
+    const id = bookElement.querySelector(".id")
+    const title = bookElement.querySelector(".title")
+    const auth = bookElement.querySelector(".auth")
+    const cat = bookElement.querySelector(".cat")
+    const price = bookElement.querySelector(".price")
+
+    let uploadedImage = upload(data.image)
+    let textId = document.createTextNode(data.id)
+    let textTitle = document.createTextNode(data.title)
+    let textName = document.createTextNode(data.name)
+    let textLast = document.createTextNode(data.last)
+    let textCat = document.createTextNode(data.cat)
+    let textPrice = document.createTextNode(data.price)
+    
+    img.appendChild(uploadedImage)
+    id.appendChild(textId)
+    title.appendChild(textTitle)
+    auth.appendChild(textName)
+    auth.appendChild(textLast)
+    cat.appendChild(textCat)
+    price.appendChild(textPrice)
+
+    return bookElement
 }
