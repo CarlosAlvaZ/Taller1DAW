@@ -1,0 +1,79 @@
+*, *::after, *::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.text{
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    box-shadow: 0 1px 20px #5C5C5C;
+}
+
+.text img {
+    width: 60px;
+    justify-self: left;
+}
+
+.text h1 {
+    color: #5C5C5C;
+    margin: 0 0 0 30px;
+}
+
+#titulo {
+    padding: 30px;
+    color: #5C5C5C;
+}
+
+.list {
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.book-element {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    box-shadow: 0 0 6px #919191;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.book-element .img {
+    width: 200px;
+    height: 200px;
+    background-image: url(./code.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.book-element .info {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    padding: 10px;
+}
+
+.book-element .info div h5 {
+    font-size: 15px;
+    color: black;
+}
+
+.book-element .data {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    padding: 10px;
+}
+
+.book-element .data div p {
+    font-size: 14px;
+}
+
+.book-element .data .id p{
+    font-style: italic;
+}
+
+.book-element .data .title p{
+    font-weight: bold;
+}
