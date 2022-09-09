@@ -5,8 +5,6 @@ const table = document.querySelector(".main-table")
 const minmaxHtml = document.querySelector(".min-max")
 let range = 100
 
-
-
 // Creando funcion crear_matriz que se vale de ciclos for para crear una matriz multidimensional
 function crear_matriz(dimensiones, elementos){
     
@@ -62,12 +60,20 @@ function mostrar(arreglo){
 function mostrar_minmax(min, max){
     let minmaxFragment = new DocumentFragment()
     let p1 = document.createElement('p')
-    let text1 = document.createTextNode(`El numero menor es: ${min}`)
+    let text1 = document.createTextNode('El numero menor es: ')
+    let strong1 = document.createElement('strong')
+    let strongText1 = document.createTextNode(min)
+    strong1.appendChild(strongText1)
     p1.appendChild(text1)
+    p1.appendChild(strong1)
     p1.classList = 'minText'
     let p2 = document.createElement('p')
-    let text2 = document.createTextNode(`El numero mayor es: ${max}`)
+    let text2 = document.createTextNode('El numero mayor es: ')
+    let strong2 = document.createElement('strong')
+    let strongText2 = document.createTextNode(max)
+    strong2.appendChild(strongText2)
     p2.appendChild(text2)
+    p2.appendChild(strong2)
     p2.classList = 'maxText'
     minmaxFragment.appendChild(p1)
     minmaxFragment.appendChild(p2)

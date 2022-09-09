@@ -1,6 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;600&display=swap');
+
+*, *::before, *::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.text{
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    box-shadow: 0 1px 20px #5C5C5C;
+}
+
+.text img {
+    width: 60px;
+    justify-self: left;
+}
+
+.text h1 {
+    color: #5C5C5C;
+    margin: 0 0 0 30px;
+}
+
+.controllers {
+    display: flex;
+    padding: 30px;
+    font-family: 'Montserrat', sans-serif;
+    color: #5C5C5C;
+    align-items: flex-end;
+}
+
+.controllers h3 {
+    margin: 0 30px 0 0;
+}
+
+.controllers input {
+    height: 30px;
+    width: 250px;
+    margin: 0 30px 0 0;
+    border: none;
+    padding: 5px;
+    outline: none;
+    border-bottom: #5C5C5C solid 1px;
+    transition: border 100ms ease-in;
+}
+
+.controllers input:focus{
+    border-bottom: #157347 solid 2px;
+}
+
+.controllers button {
+    width: 200px;
+    height: 40px;
+    background-color: #157347;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    transition: all 300ms ease;
+}
+
+.controllers button:hover {
+    transform: scale(1.01);
+    opacity: 0.9;
+}
+
+.controllers button:active {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.main-table {
+    padding: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 22px;
+    color: #5C5C5C;
+}
+
+.main-table tr td {
+    padding: 2px 15px 2px 15px;
+    text-align: center;
+    position: relative;
+}
+
+.main-table tr:nth-child(odd) td:nth-child(odd)::before{
+    content: ' ';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #5C5C5C;
+    opacity: 0.2;
+}
+
+.main-table tr:nth-child(even) td:nth-child(even)::before{
+    content: ' ';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #5C5C5C;
+    opacity: 0.2;
+}
+
 .min {
-    color: red;
+    color: white;
+    background-color: #BB2D3B;
 }
 .max {
-    color: green
+    color: white;
+    background-color: #157347;
+}
+
+.min-max {
+    padding: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 22px;
+    color: #5C5C5C;
 }
