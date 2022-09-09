@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./libros.js"></script>
+    <script src="./libros.js" defer></script>
     <link rel="stylesheet" href="./libros.css">
     <link rel="icon" href="./code.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
@@ -47,7 +47,7 @@
         <div class="inputs">
             <div class="input">
                 <label for="inId">Libro ID: </label>
-                <input type="text" name="inId" id="inId">
+                <input type="number" name="inId" id="inId">
             </div>
             <div class="input">
                 <label for="inTitle">Titulo: </label>
@@ -70,8 +70,11 @@
                 <input type="number" name="inPrice" id="inPrice">
             </div>
             <div class="input image-input">
-                <label for="inImage">Iagen:</label>
-                <input type="file" name="inImage" accept=".jpg, .jpeg, .png">
+                <label for="inImage">Imagen:</label>
+                <input type="file" name="inImage" accept=".jpg, .jpeg, .png" id="inImage">
+            </div>
+            <div class="add-button-div">
+                <button class="add-button">Añadir a lista</button>
             </div>
         </div>
     </div>
